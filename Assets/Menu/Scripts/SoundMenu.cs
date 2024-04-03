@@ -8,7 +8,7 @@ public class SoundMenu : MonoBehaviour
 
     private float _minVolume = -80f;
     private float _maxVolume = 0f;
-    
+
     private bool _enabled = true;
 
     public void ChangeVolume(float volume)
@@ -30,11 +30,13 @@ public class SoundMenu : MonoBehaviour
     {
         if (_enabled)
         {
-            _enabled = _master.audioMixer.SetFloat("MasterVolume", _minVolume);
+            _enabled = false;
+            _master.audioMixer.SetFloat("MasterVolume", _minVolume);
         }
         else
         {
-            _enabled = _master.audioMixer.SetFloat("MasterVolume", _maxVolume);
+            _enabled = true;
+            _master.audioMixer.SetFloat("MasterVolume", _maxVolume);
         }
     }
 }
