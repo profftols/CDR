@@ -21,9 +21,13 @@ public class TargetFollower : MonoBehaviour
 
     private void Follow()
     {
-        Vector3 position = _targetPosition.position;
-        _rigidbody.velocity =
-            transform.TransformDirection(new Vector3(position.x, position.y * Time.deltaTime, position.z + _offset) -
-                                         transform.position) * (_speed * Time.deltaTime);
+        Vector3 direction = _targetPosition.position - transform.position;
+        float distance = direction.magnitude;
+
+        if (distance > _offset)
+        {
+            _rigidbody.MovePosition(transform.position + direction.normalized * (_speed * Time.deltaTime));
+            transform.LookAt(_targetPosition);
+        }
     }
 }
