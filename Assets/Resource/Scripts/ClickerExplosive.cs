@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
@@ -23,32 +24,27 @@ public class ClickerExplosive : MonoBehaviour
         }
     }
 
+    public void Explode(List<Rigidbody> pointsExplosion)
+    {
+        if (pointsExplosion == null)
+        {
+            return;
+        }
+
+        foreach (Rigidbody hit in pointsExplosion)
+        {
+            hit.AddExplosionForce(_explosionForce, hit.transform.position, _explosionRadius);
+        }
+    }
+    
     private void Shoot()
     {
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out RaycastHit hit, _maxDistance);
-        Cube point = hit.collider.GetComponent<Cube>();
-        
-        if (point)
+
+        if (hit.collider.TryGetComponent(out Cube cube))
         {
-            point.Destroy();
-        }
-
-        Explode(hit.transform.position);
-    }
-
-    private void Explode(Vector3 point)
-    {
-        Collider[] colliders = Physics.OverlapSphere(point, _explosionRadius);
-
-        foreach (Collider hit in colliders)
-        {
-            Rigidbody rigidbody = hit.GetComponent<Rigidbody>();
-
-            if (rigidbody != null)
-            {
-                rigidbody.AddExplosionForce(_explosionForce, point, _explosionRadius);
-            }
+            cube.Destroy();
         }
     }
 }

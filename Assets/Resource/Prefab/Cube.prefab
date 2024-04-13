@@ -146,7 +146,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b5398cf834d4948bb5ed39a34a6f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clickerExplosive: {fileID: 0}
-  _poolCubes: {fileID: 0}
-  _explosionForce: 250
-  _explosionRadius: 250
+  _poolCubes: {fileID: 5103672998672778149, guid: f48c59a50f7bbd340af67be5315eaf9a,
+    type: 3}
