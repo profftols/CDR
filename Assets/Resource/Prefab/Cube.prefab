@@ -146,5 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b5398cf834d4948bb5ed39a34a6f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _poolCubes: {fileID: 5103672998672778149, guid: f48c59a50f7bbd340af67be5315eaf9a,
-    type: 3}
+  _materials:
+  - {fileID: 2100000, guid: 02dcb6e2e1d1d104d8ebeb422725da79, type: 2}
+  - {fileID: 2100000, guid: 680cbfa9234f308438430684eeb4474b, type: 2}
+  - {fileID: 2100000, guid: 975b4eec686e06248a59dd83b7165706, type: 2}
+  - {fileID: 2100000, guid: 0a02dd4bb4fa8b9458c5188c50550d38, type: 2}

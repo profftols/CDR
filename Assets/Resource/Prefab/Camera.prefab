@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8172568097311599232}
-  m_LocalRotation: {x: 0.16475677, y: -0.33045083, z: 0.05870126, w: 0.9274759}
+  m_LocalRotation: {x: 0.16475767, y: -0.33045077, z: 0.058701582, w: 0.92747575}
   m_LocalPosition: {x: 54.62, y: 12.36, z: -46.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 20.146, y: -39.221, z: 0}
 --- !u!20 &5540990684956524034
 Camera:
@@ -106,5 +106,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxDistance: 65
-  _explosionForce: 500
-  _explosionRadius: 50
+  _explosionForce: 50
+  _explosionRadius: 5

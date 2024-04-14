@@ -1,25 +1,45 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(Renderer))]
 public class Cube : MonoBehaviour
 {
-    [SerializeField] private PoolCubes _poolCubes;
-
-    private float _chanceDestruction => transform.localScale.x / _division;
-    private float _randomChance => (float)Random.Range(_minRandomChance, _maxRandomChance) / _maxRandomChance;
-    private int _division = 2;
-    private int _minRandomChance = 1;
-    private int _maxRandomChance = 100;
+    [SerializeField] private Material[] _materials;
+    
+    private float ChanceDestruction => transform.localScale.x;
+    private float RandomChance => Random.Range(_minRandomChance, _maxRandomChance);
+    
+    private float _multiplier = 0.5f;
+    private float _minRandomChance = 0.01f;
+    private float _maxRandomChance = 1f;
+    private int _minCube = 2;
+    private int _maxCube = 7;
 
     public void Destroy()
     {
-        if (_randomChance <= _chanceDestruction)
+        int decimalPlaces = 2;
+        float randomChance = Mathf.Round(RandomChance * Mathf.Pow(10, decimalPlaces)) / Mathf.Pow(10, decimalPlaces);
+        
+        if (randomChance <= ChanceDestruction)
         {
-            transform.localScale /= _division;
-            _poolCubes.SpawnCubes(transform);
+            transform.localScale *= _multiplier;
+            Crumble();
         }
         
         gameObject.SetActive(false);
+    }
+
+    private void Crumble()
+    {
+        int count = Random.Range(_minCube, _maxCube);
+        
+        for (int i = 0; i < count; i++)
+        {
+           var crumble = Instantiate(this, transform.position, Quaternion.identity);
+           
+           if (crumble.TryGetComponent(out Renderer rendere))
+           {
+               rendere.material = _materials[Random.Range(0, _materials.Length)];
+           }
+        }
     }
 }

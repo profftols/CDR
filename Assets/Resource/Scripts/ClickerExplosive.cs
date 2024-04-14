@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Camera))]
 public class ClickerExplosive : MonoBehaviour
 {
     [SerializeField] private float _maxDistance = 10f;
@@ -10,10 +9,10 @@ public class ClickerExplosive : MonoBehaviour
     [SerializeField] private float _explosionRadius = 500f;
 
     private Camera _camera;
-
-    private void Awake()
+    
+    private void Start()
     {
-        _camera = GetComponent<Camera>();
+        _camera = Camera.main;
     }
 
     private void Update()
