@@ -39,11 +39,13 @@ public class ClickerExplosive : MonoBehaviour
     private void Shoot()
     {
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(ray, out RaycastHit hit, _maxDistance);
 
-        if (hit.collider.TryGetComponent(out Cube cube))
+        if (Physics.Raycast(ray, out RaycastHit hit, _maxDistance))
         {
-            cube.Destroy();
+            if (hit.collider.TryGetComponent(out Cube cube))
+            {
+                cube.Destroy();
+            }
         }
     }
 }
