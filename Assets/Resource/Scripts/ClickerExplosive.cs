@@ -22,15 +22,15 @@ public class ClickerExplosive : MonoBehaviour
             Shoot();
         }
     }
-
-    public void Explode(List<Rigidbody> pointsExplosion)
+    
+    public void Explode(List<Rigidbody> bodyExplosions)
     {
-        if (pointsExplosion == null)
+        if (bodyExplosions == null)
         {
             return;
         }
 
-        foreach (Rigidbody hit in pointsExplosion)
+        foreach (var hit in bodyExplosions)
         {
             hit.AddExplosionForce(_explosionForce, hit.transform.position, _explosionRadius);
         }
