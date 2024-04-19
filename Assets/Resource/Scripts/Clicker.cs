@@ -2,11 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClickerExplosive : MonoBehaviour
+public class Clicker : MonoBehaviour
 {
     [SerializeField] private float _maxDistance = 10f;
-    [SerializeField] private float _explosionForce = 5000f;
-    [SerializeField] private float _explosionRadius = 500f;
 
     private Camera _camera;
     
@@ -20,19 +18,6 @@ public class ClickerExplosive : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             Shoot();
-        }
-    }
-    
-    public void Explode(List<Rigidbody> bodyExplosions)
-    {
-        if (bodyExplosions == null)
-        {
-            return;
-        }
-
-        foreach (var hit in bodyExplosions)
-        {
-            hit.AddExplosionForce(_explosionForce, hit.transform.position, _explosionRadius);
         }
     }
     
