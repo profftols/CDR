@@ -29,7 +29,7 @@ public class Cube : MonoBehaviour
     {
         int decimalPlaces = 2;
         float randomChance = Mathf.Round(RandomChance * Mathf.Pow(10, decimalPlaces)) / Mathf.Pow(10, decimalPlaces);
-
+        
         if (randomChance <= ChanceDestruction)
         {
             Crumble();
