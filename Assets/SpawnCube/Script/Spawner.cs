@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +7,10 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private Box _box;
     [SerializeField] private int _poolBox;
+    [SerializeField] private Transform[] _positions;
 
     private Queue<Box> _boxes;
-    private Transform[] _positions;
-    private float _timerSpawn = 3f;
+    private float _timerSpawn = 1.4f;
 
     private void Start()
     {
@@ -20,20 +19,18 @@ public class Spawner : MonoBehaviour
         for (int i = 0; i < _poolBox; i++)
         {
             var box = Instantiate(_box);
-            box.SetSpawner(this);
             box.gameObject.SetActive(false);
             _boxes.Enqueue(box);
         }
 
-        _positions = transform.GetComponentsInChildren<Transform>();
-
         StartCoroutine(SpawnBox());
     }
 
-    public void AddPoolBox(Box box)
+    private void AddPoolBox(Box box)
     {
         _boxes.Enqueue(box);
         box.gameObject.SetActive(false);
+        box.BackInPool -= AddPoolBox;
     }
 
     private IEnumerator SpawnBox()
@@ -45,6 +42,7 @@ public class Spawner : MonoBehaviour
             var box = _boxes.Dequeue();
             box.transform.position = _positions[Random.Range(0, _positions.Length)].position;
             box.gameObject.SetActive(true);
+            box.BackInPool += AddPoolBox;
 
             yield return wait;
         }

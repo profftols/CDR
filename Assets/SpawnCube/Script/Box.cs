@@ -8,8 +8,10 @@ public class Box : MonoBehaviour
 {
     [SerializeField] private Material[] _materials;
 
-    private Spawner _spawner;
+    public event Action<Box> BackInPool;
+    
     private MeshRenderer _renderer;
+    private bool isFirstTimeDown = true;
     private int _defaultMaterial = 0;
     private int _minTimer = 2;
     private int _maxTimer = 6;
@@ -24,14 +26,14 @@ public class Box : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Platform platform))
         {
-            ChangeColor(_materials[_materials.Length-1]);
+            if (isFirstTimeDown)
+            {
+                ChangeColor(_materials[_materials.Length - 1]);
+                isFirstTimeDown = false;
+            }
+            
             StartCoroutine(LaunchDeath());
         }
-    }
-    
-    public void SetSpawner(Spawner spawner)
-    {
-        _spawner = spawner;
     }
 
     private IEnumerator LaunchDeath()
@@ -40,8 +42,7 @@ public class Box : MonoBehaviour
         
         yield return timer;
 
-        _spawner.AddPoolBox(this);
-        ChangeColor(_materials[_defaultMaterial]);
+        BackInPool?.Invoke(this);
     }
 
     private void ChangeColor(Material material)
