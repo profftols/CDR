@@ -11,7 +11,6 @@ public class Box : MonoBehaviour
     public event Action<Box> BackInPool;
     
     private MeshRenderer _renderer;
-    private bool isFirstTimeDown = true;
     private int _defaultMaterial = 0;
     private int _minTimer = 2;
     private int _maxTimer = 6;
@@ -26,12 +25,7 @@ public class Box : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Platform platform))
         {
-            if (isFirstTimeDown)
-            {
-                ChangeColor(_materials[_materials.Length - 1]);
-                isFirstTimeDown = false;
-            }
-            
+            ChangeColor(_materials[_materials.Length - 1]);
             StartCoroutine(LaunchDeath());
         }
     }
@@ -43,6 +37,7 @@ public class Box : MonoBehaviour
         yield return timer;
 
         BackInPool?.Invoke(this);
+        ChangeColor(_materials[_defaultMaterial]);
     }
 
     private void ChangeColor(Material material)

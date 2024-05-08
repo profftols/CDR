@@ -39,9 +39,16 @@ public class Spawner : MonoBehaviour
 
         while (enabled)
         {
-            var box = _boxes.Dequeue();
+            if (_boxes.TryDequeue(out Box box))
+            {
+                box.gameObject.SetActive(true);
+            }
+            else
+            {
+                box = Instantiate(_box);
+            }
+            
             box.transform.position = _positions[Random.Range(0, _positions.Length)].position;
-            box.gameObject.SetActive(true);
             box.BackInPool += AddPoolBox;
 
             yield return wait;
