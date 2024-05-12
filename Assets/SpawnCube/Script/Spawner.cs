@@ -6,20 +6,26 @@ using Random = UnityEngine.Random;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private Box _box;
-    [SerializeField] private int _poolBox;
+    [SerializeField] private Bomb _bomb;
+    [SerializeField] private int _poolObject;
     [SerializeField] private Transform[] _positions;
-
+    
     private Queue<Box> _boxes;
+    private Queue<Bomb> _bombs;
     private float _timerSpawn = 1.4f;
 
     private void Start()
     {
         _boxes = new Queue<Box>();
+        _bombs = new Queue<Bomb>();
 
-        for (int i = 0; i < _poolBox; i++)
+        for (int i = 0; i < _poolObject; i++)
         {
             var box = Instantiate(_box);
+            var bomb = Instantiate(_bomb);
             box.gameObject.SetActive(false);
+            bomb.gameObject.SetActive(false);
+            _bombs.Enqueue(bomb);
             _boxes.Enqueue(box);
         }
 
@@ -30,7 +36,30 @@ public class Spawner : MonoBehaviour
     {
         _boxes.Enqueue(box);
         box.gameObject.SetActive(false);
+        SpawnBomb(box.transform);
         box.BackInPool -= AddPoolBox;
+    }
+
+    private void AddPoolBomb(Bomb bomb)
+    {
+        bomb.gameObject.SetActive(false);
+        bomb.BackInPool -= AddPoolBomb;
+    }
+
+    private void SpawnBomb(Transform boxPosition)
+    {
+        if (_bombs.TryDequeue(out Bomb bomb))
+        {
+            bomb.gameObject.SetActive(true);
+        }
+        else
+        {
+            bomb = Instantiate(_bomb);
+        }
+
+        bomb.transform.position = boxPosition.position;
+        bomb.BackInPool += AddPoolBomb;
+        bomb.StartBoom();
     }
 
     private IEnumerator SpawnBox()

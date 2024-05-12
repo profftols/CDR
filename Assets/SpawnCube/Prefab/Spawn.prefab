@@ -206,7 +206,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _box: {fileID: 4202956001058520931, guid: 59d3ea85468ff0948bc952c18a782269, type: 3}
-  _poolBox: 10
+  _bomb: {fileID: 4843453478871978876, guid: 15a1be9e391dca34a85ed282a04e56e9, type: 3}
+  _poolObject: 5
+  _positions:
+  - {fileID: 7737706584481639114}
+  - {fileID: 7044529214810619635}
+  - {fileID: 3406240022101203166}
+  - {fileID: 6983473219022166690}
+  - {fileID: 8005221743604998614}
+  - {fileID: 1524635241993867169}
 --- !u!1 &8327685631625036244
 GameObject:
   m_ObjectHideFlags: 0

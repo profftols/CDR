@@ -11,10 +11,11 @@ public class Box : MonoBehaviour
     public event Action<Box> BackInPool;
     
     private MeshRenderer _renderer;
-    private int _defaultMaterial = 0;
     private int _minTimer = 2;
     private int _maxTimer = 6;
-
+    private int _defaultMaterial = 0;
+    
+    
     private void Start()
     {
         _renderer = GetComponent<MeshRenderer>();
