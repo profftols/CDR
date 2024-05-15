@@ -164,7 +164,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7017664360075931557}
-  - component: {fileID: 820053026940216270}
+  - component: {fileID: 1487397526026722521}
   m_Layer: 0
   m_Name: Spawn
   m_TagString: Untagged
@@ -193,7 +193,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &820053026940216270
+--- !u!114 &1487397526026722521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,9 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7722df61188c2a4ca22d97c96beeb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _box: {fileID: 4202956001058520931, guid: 59d3ea85468ff0948bc952c18a782269, type: 3}
-  _bomb: {fileID: 4843453478871978876, guid: 15a1be9e391dca34a85ed282a04e56e9, type: 3}
-  _poolObject: 5
+  _boxPool: {fileID: 0}
   _positions:
   - {fileID: 7737706584481639114}
   - {fileID: 7044529214810619635}
